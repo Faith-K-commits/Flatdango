@@ -10,10 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentFilm;
 
+    // URL of the hosted JSON data
+    const jsonBinUrl = "https://api.jsonbin.io/v3/b/66927a4dad19ca34f8871911";
+    const options = {
+        headers: {
+            'X-Master-Key': '$2a$10$Vh0tkfc6hFlhSqWKav/yXenbp.RLGASmLhNOQmoNbEh4DInzDH2x6'
+        }
+    };
+
     // Fetch all films and populate the menu
-    fetch("http://localhost:3000/films")
+    fetch(jsonBinUrl, options)
         .then(response => response.json())
-        .then(films => {
+        .then(data => {
+            const films = data.record.films;
             filmsList.innerHTML = "";
             films.forEach(film => {
                 const li = document.createElement("li");
@@ -22,13 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 li.addEventListener("click", () => loadFilmDetails(film));
                 filmsList.appendChild(li);
             });
-        });
 
-    // Fetch the first film's details when the page loads
-    fetch("http://localhost:3000/films/1")
-        .then(response => response.json())
-        .then(film => {
-            loadFilmDetails(film);
+            // Load the first film's details by default
+            if (films.length > 0) {
+                loadFilmDetails(films[0]);
+            }
         });
 
     // Load film details
