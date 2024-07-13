@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 li.addEventListener("click", () => loadFilmDetails(film));
                 filmsList.appendChild(li);
             });
+        });
 
-            // Load the first film's details by default
-            if (films.length > 0) {
-                loadFilmDetails(films[0]);
-            }
+    // Fetch the first film's details when the page loads
+    fetch("http://localhost:3000/films/1")
+        .then(response => response.json())
+        .then(film => {
+            loadFilmDetails(film);
         });
 
     // Load film details
