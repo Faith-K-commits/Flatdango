@@ -1,6 +1,6 @@
 # Flatdango
 
-Flatdango is an application that allows users to purchase movie tickets from Flatiron Movie Theater.
+[Flatdango](https://flatdango.netlify.app/) is an application that allows users to purchase movie tickets from Flatiron Movie Theater.
 
 ## Features
 
